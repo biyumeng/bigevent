@@ -135,27 +135,25 @@
     </script>
 
     <script>
-        category.show(function(res) {
-            var htmlStr = template('temp_cade', res)
+        category.show(res => {
+            let htmlStr = template('temp_cade', res)
             $('#selCategory').html(htmlStr)
         })
     </script>
 
     <script>
-        var curPage = ''; // 表示当前要展示第几页
-        var type = ''; //文章类型
-        var state = ''; //文章状态
+        let curPage = ''; // 表示当前要展示第几页
+        let type = ''; //文章类型
+        let state = ''; //文章状态
 
-        var curTotalPage = ''; // 表示当前查询总页数
+        let curTotalPage = ''; // 表示当前查询总页数
 
-        getAndShow()
-
-        function getAndShow() {
-            article.show(curPage, type, state, function(res) {
+        let getAndShow = () => {
+            article.show(curPage, type, state, res => {
                 if (res.code === 200) {
                     // console.log(res);
                     //添加模板引擎，并渲染
-                    var htmlStr = template('temp_table', res)
+                    let htmlStr = template('temp_table', res)
                     $('#articleContainer').html(htmlStr)
 
                     // 如果前后两次查询结果得到的总页数不相同。
@@ -179,7 +177,7 @@
                         prev: '上一页',
                         last: '尾页',
                         // 点击页码，更新页面
-                        onPageClick: function(event, page) {
+                        onPageClick: (event, page) => {
                             // $('#page-content').text('Page ' + page);
                             curPage = page
 
@@ -191,8 +189,10 @@
             })
         }
 
+        getAndShow()
+
         //点击筛选
-        $('#btnSearch').click(function() {
+        $('#btnSearch').click(() => {
             // 获得文章类型
             type = $('#selCategory').val();
             // 获得文章状态/
@@ -207,12 +207,12 @@
 
         //点击删除
         $('#articleContainer').on('click', '.del', function() {
-            var id = $(this).attr('data-id');
+            let id = $(this).attr('data-id');
             if (window.confirm('确定要删除吗') === false) {
                 return
             }
 
-            article.del(id, function(res) {
+            article.del(id, res => {
                 if (res.code === 200) {
                     getAndShow()
                 }

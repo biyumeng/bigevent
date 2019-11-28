@@ -61,10 +61,10 @@
     <script src="./js/utils/user.js"></script>
 
     <script>
-        $('#btnLogin').click(function() {
+        $('#btnLogin').click(() => {
             //获得用户输入值
-            var myName = $('#myName').val().trim();
-            var myPassword = $('#myPassword').val().trim();
+            let myName = $('#myName').val().trim();
+            let myPassword = $('#myPassword').val().trim();
 
             //设置不能为空
             if (myName === '' || myPassword === '') {
@@ -74,7 +74,7 @@
                 return
             }
             // 语义化
-            user.login(myName, myPassword, function(res) {
+            user.login(myName, myPassword, res => {
                 console.log(res);
                 if (res.code === 200) {
                     location.href = './index.html'

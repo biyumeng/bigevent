@@ -1,19 +1,19 @@
 //基础信息提出来
-var baseurl = 'http://localhost:8000/'
+const BASEURL = 'http://localhost:8000/'
 
 // 列出所有用过的接口的地址
-var APIURLS = {
-    user_login: baseurl + 'admin/login',
-    user_logout: baseurl + 'admin/logout',
-    user_getuser: baseurl + 'admin/getuser',
+const APIURLS = {
+    user_login: BASEURL + 'admin/login',
+    user_logout: BASEURL + 'admin/logout',
+    user_getuser: BASEURL + 'admin/getuser',
 
-    category_show: baseurl + 'admin/category_search',
-    category_delete: baseurl + 'admin/category_delete',
-    category_add: baseurl + 'admin/category_add',
-    category_edit: baseurl + 'admin/category_edit',
+    category_show: BASEURL + 'admin/category_search',
+    category_delete: BASEURL + 'admin/category_delete',
+    category_add: BASEURL + 'admin/category_add',
+    category_edit: BASEURL + 'admin/category_edit',
 
-    article_show: baseurl + 'admin/search',
-    article_del: baseurl + 'admin/article_delete',
-    article_add: baseurl + 'admin/article_publish',
-    article_edit: baseurl + 'admin/article_edit',
+    article_show: BASEURL + 'admin/search',
+    article_del: BASEURL + 'admin/article_delete',
+    article_add: BASEURL + 'admin/article_publish',
+    article_edit: BASEURL + 'admin/article_edit',
 }

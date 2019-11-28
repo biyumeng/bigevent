@@ -1,8 +1,8 @@
 //基础信息提出来
-var baseurl = 'http://localhost:8000/'
+const baseurl = 'http://localhost:8000/'
 
 // 列出所有用过的接口的地址
-var APIURLS = {
+const APIURLS = {
     category_show: baseurl + 'admin/category_search',
 
     article_show: baseurl + 'admin/search',

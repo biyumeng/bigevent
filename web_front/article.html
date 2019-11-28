@@ -246,26 +246,26 @@
         dayjs.locale('zh-cn')
 
         //文章导航栏
-        category.show(function(res) {
+        category.show((res) => {
             console.log(res);
-            var htmlStr = template('temp_catd', res)
+            let htmlStr = template('temp_catd', res)
             $('#left_menu').html(htmlStr)
             $('#level_two').html('<li class="up"></li>' + htmlStr)
         })
 
-        var id = location.search.substr(4);
+        let id = location.search.substr(4);
         console.log(id);
         //获得文章详情
-        article.getDetail(id, function(res) {
+        article.getDetail(id, (res) => {
             console.log(res);
-            var typeId = res.data.type
+            let typeId = res.data.type
             $('#article_title').html(res.data.title)
             $('#article_author').html(res.data.author)
             $('#article_date').html(res.data.date)
             $('#article_content').html(res.data.content)
 
-            category.show(function(res) {
-                var rs = res.data.find(function(item) {
+            category.show((res) => {
+                let rs = res.data.find((item) => {
                     if (item.id == typeId) {
                         return true
                     }
@@ -277,15 +277,15 @@
         })
 
         //文章添加评论
-        $('#btnAdd').click(function() {
-            var content = $('#comment_content').val().trim();
-            var name = $('#comment_name').val().trim();
+        $('#btnAdd').click(() => {
+            let content = $('#comment_content').val().trim();
+            let name = $('#comment_name').val().trim();
             if (name === '' || content === '') {
                 // alert('内容不能为空');
                 bootbox.alert("不能为空!");
                 return
             }
-            comment.add(name, content, id, function(res) {
+            comment.add(name, content, id, (res) => {
                 console.log(res);
                 if (res.code == 200) {
                     $('#comment_content').val('');
@@ -295,23 +295,24 @@
             })
         })
 
-        //获取评论
-        getAndShow()
 
-        function getAndShow() {
-            comment.get(id, function(res) {
-                console.log(res);
 
-                // 对于所有的评论数据，给每一条数据中额外添加一个相对时间的属性
-                // 然后，在模板引擎中使用这个属性
-                res.data.forEach(function(item) {
-                    item.relativeDt = dayjs(item.dt).toNow()
+        let getAndShow = () => {
+                comment.get(id, (res) => {
+                    console.log(res);
+                    res.data.reverse()
+                        // 对于所有的评论数据，给每一条数据中额外添加一个相对时间的属性
+                        // 然后，在模板引擎中使用这个属性
+                    res.data.forEach((item) => {
+                        item.relativeDt = dayjs(item.dt).toNow()
+                    })
+
+                    let htmlStr = template('temp_comment', res)
+                    $('#comment_list_con').html(htmlStr)
                 })
-
-                var htmlStr = template('temp_comment', res)
-                $('#comment_list_con').html(htmlStr)
-            })
-        }
+            }
+            //获取评论
+        getAndShow()
     </script>
 </body>
 

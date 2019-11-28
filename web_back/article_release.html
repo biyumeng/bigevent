@@ -92,8 +92,8 @@
 
     <script>
         //获取数据库里的文章类别
-        category.show(function(res) {
-            var htmlStr = template('temp', res)
+        category.show(res => {
+            let htmlStr = template('temp', res)
 
             // console.log(res);
             $('#release-show').html(htmlStr)
@@ -101,15 +101,15 @@
 
         // 图片上传图片预览
         $('#exampleInputFile').change(function() {
-            var file = this.files[0];
+            let file = this.files[0];
             if (file) {
-                var url = URL.createObjectURL(file);
+                let url = URL.createObjectURL(file);
                 $('#previewImg').prop('src', url)
             }
         })
 
         //发布
-        $('#btnAdd').click(function() {
+        $('#btnAdd').click(() => {
             var fd = new FormData(document.getElementById('myform'))
             console.log(fd);
             fd.append('state', '已发布')
@@ -121,7 +121,7 @@
             fd.set('content', tinyMCE.activeEditor.getContent())
 
 
-            article.add(fd, function(res) {
+            article.add(fd, res => {
                 console.log(res);
                 if (res.code === 201) {
                     alert('发表成功');

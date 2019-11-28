@@ -1,7 +1,7 @@
-var category = {
+const category = {
     //获得文章类别
-    show: function(callback) {
-        $.get(APIURLS.category_show, function(res) {
+    show: (callback) => {
+        $.get(APIURLS.category_show, (res) => {
             callback(res)
         })
     },

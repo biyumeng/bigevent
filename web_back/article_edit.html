@@ -91,22 +91,29 @@
 
     <script>
         // article.edit()
-        var id = location.search.substr(4)
+        let id = location.search.substr(4)
 
         console.log(id);
         // 获取文章内容
-        article.getDetail(id, function(res) {
-            var typeId = res.data.type;
+        article.getDetail(id, res => {
+            let {
+                type,
+                title,
+                cover,
+                date,
+                content
+            } = res.data;
+            let typeId = type;
             console.log(res);
             // 显示文章内容
-            $('#inputEmail3').val(res.data.title)
-            $('#edit_cover').prop('src', res.data.cover)
-            $('#dateinput').val(res.data.date)
-            $('#rich_content').val(res.data.content)
+            $('#inputEmail3').val(title)
+            $('#edit_cover').prop('src', cover)
+            $('#dateinput').val(date)
+            $('#rich_content').val(content)
 
             //类别显示
-            category.show(function(res) {
-                var htmlStr = template('temp_cate', res)
+            category.show(res => {
+                let htmlStr = template('temp_cate', res)
                 $('#edit_type').html(htmlStr);
                 $('#edit_type').val(typeId);
             })
@@ -114,21 +121,21 @@
 
         // 图片预览
         $('#exampleInputFile').change(function() {
-            var file = this.files[0];
+            let file = this.files[0];
             if (file) {
-                var url = URL.createObjectURL(file);
+                let url = URL.createObjectURL(file);
                 $('#edit_cover').prop('src', url)
             }
         })
 
         //发布
-        $('#btnSave').click(function() {
-            var fd = new FormData(document.getElementById('myform'))
+        $('#btnSave').click(() => {
+            let fd = new FormData(document.getElementById('myform'))
             fd.append('id', id)
             fd.set('content', tinyMCE.activeEditor.getContent())
 
             //文章编辑
-            article.edit(fd, function(res) {
+            article.edit(fd, res => {
                 console.log(res);
                 if (res.code === 200) {
                     alert('修改成功')

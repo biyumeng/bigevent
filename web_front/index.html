@@ -248,17 +248,17 @@
     </script>
 
     <script>
-        category.show(function(res) {
+        category.show((res) => {
             console.log(res);
-            var htmlStr = template('temp_catd', res)
+            let htmlStr = template('temp_catd', res)
             $('#left_menu').html(htmlStr)
             $('#level_two').html('<li class="up"></li>' + htmlStr)
         })
 
-        article.getFive(function(res) {
+        article.getFive((res) => {
             console.log(res);
 
-            var htmlStr = template('tempList', res);
+            let htmlStr = template('tempList', res);
             $('#focus_list').html(htmlStr);
         })
     </script>
